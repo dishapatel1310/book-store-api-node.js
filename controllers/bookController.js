@@ -1,10 +1,7 @@
-// bookController.js
-// Yaha par har API ka "logic" likha hua hai.
-// Har function ek request handle karta hai aur response bhejta hai.
+
 
 const { readBooks, writeBooks } = require("../models/bookModel");
 
-// 1) Saari books get karna --> GET /api/books
 function getAllBooks(req, res) {
   const books = readBooks();
   res.status(200).json({
@@ -14,7 +11,7 @@ function getAllBooks(req, res) {
   });
 }
 
-// 2) Single book get karna id se --> GET /api/books/:id
+
 function getBookById(req, res) {
   const books = readBooks();
   const id = parseInt(req.params.id);
@@ -48,7 +45,7 @@ function createBook(req, res) {
 
   const books = readBooks();
 
-  // Nayi id generate karna (last id + 1)
+
   const newId = books.length > 0 ? books[books.length - 1].id + 1 : 1;
 
   const newBook = {
@@ -69,7 +66,6 @@ function createBook(req, res) {
   });
 }
 
-// 4) Book update karna --> PUT /api/books/:id
 function updateBook(req, res) {
   const books = readBooks();
   const id = parseInt(req.params.id);
@@ -85,7 +81,7 @@ function updateBook(req, res) {
 
   const { title, author, price, quantity } = req.body;
 
-  // Jo field bheji gayi hai wahi update hogi, baaki purani rahegi
+
   books[index] = {
     ...books[index],
     title: title !== undefined ? title : books[index].title,
@@ -103,7 +99,6 @@ function updateBook(req, res) {
   });
 }
 
-// 5) Book delete karna --> DELETE /api/books/:id
 function deleteBook(req, res) {
   const books = readBooks();
   const id = parseInt(req.params.id);
